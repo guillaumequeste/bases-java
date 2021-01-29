@@ -1,0 +1,26 @@
+1 - Aller sur : tomcat.apache.org/download-90.cgi
+    
+2 - Télécharger le fichier "targ.gz" 	(dans la partie "Core")
+
+3 - Je l'ai mis dans : user (là où j'ai les dossiers "eclipse" et "eclipse-workspace")
+
+4 - Dans Eclipse : Window -> Show View -> Other
+	-> Server -> Servers -> Open
+
+5 - Dans l'onglet "Servers" en bas à côté de "Console", clic droit sur "Tomcat v9.0..." -> New -> Server
+
+6 - Cliquer sur "Apache/Tomcast v9.0 Server" -> Next -> Browse -> sélectionner le dossier "apache-tomcat-9.0..." -> Finish
+
+7 - Pour lancer le serveur :
+ 	en bas, dans l'onglet "Servers", clic droit sur le serveur "Tomcat v9.0..." et "Start"
+
+8 - On clique sur le carré rouge "Terminate" pour arrêter les serveur
+
+9 - Je peux cliquer sur le serveur tomcat dans l'onglet "Servers" en bas -> j'accède à la configuration
+
+10 - A côté de "Deploy path", je clique sur "Browse" et je sélectionne le dossier "webapps" situé dans le dossier "apache-tomcat-9.0.41"
+
+11 - Je relance le serveur en cliquant sur "Start"
+
+12 - Dans le navigateur, je peux accéder à la page de Tomcat et au manager :
+	localhost:8080

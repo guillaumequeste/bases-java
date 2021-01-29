@@ -1,0 +1,19 @@
+1 - Dans la fenêtre de gauche ("Project Explorer"), clic droit "New" -> "Project..." -> "Java Project" -> mettre le nom du dossier -> "Finish"
+
+2 - Créer une classe principale : dans "Helloworld/src", clic droit -> "New" -> "Class" :
+	-> mettre le nom du package : "com.video2brain.javase"		(du général au particulier)
+	-> mettre le nom de la classe : "Launcher" -> cocher "public static void main(String[] args)" -> "Finish"
+
+3 - Connaître tous les types de variables primitives : dans google "oracle java type primitif"
+
+4 - Pour lancer un programme Java dans le terminal :
+	-> clic droit sur le dossier "CelsiusToFahrenheit" dans la fenêtre "Project Explorer", à gauche -> Export
+	-> choisir "Java/Runnable JAR file" -> Next
+	-> choisir le fichier à lancer "Launcher (2) - CelsiusToFahrenheit"
+	-> choisir le dossier de destination (ex : dossier "Java") -> Finish
+	-> un fichier "converterToFahrenheit.jar" est créé dans le dossier "Java"
+	-> mettre le dossier "Java" dans le terminal
+	-> java -jar converterToFahrenheit.jar 20
+		la réponse est inscrite : "Fahrenheit : 68.0"
+
+5 - Gérer les erreurs : utiliser try{} catch{}

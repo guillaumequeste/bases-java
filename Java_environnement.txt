@@ -1,0 +1,40 @@
+langage : Java
+
+IDE : Eclipse
+
+frameworks : - Hibernate (framework gérant la persistance des objets en base de données relationnelle)
+	     - Swing
+		(Swing est aussi une bibliothèque graphique pour construire des fenêtres avec des zones (north, south, east, west) pour disposer 
+		les éléments, on peut construire des boutons sur lesquels on va mettre des actions (eventListener))
+
+NetBeans : environnement de développement intégré
+
+Apache Tomcat : conteneur de servlets
+
+extension Gogle Chrome : Yet Another Rest Client (pour tester l'envoi de requêtes)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1 - JSE (Java Standard Edition) est une plateforme qui propose des API pour développer des applications côté client.
+
+2 - JEE (Java Enterprise Edition) est une extension de JSE : les API fouries permettent de développer des applications côté serveur.
+    Permet de créer des web-applications et des web-services.
+
+3 - JRE (Java Runtime Environment) permet d'exécuter du code java sur l'ordinateur. Il permet concrètement d'utiliser des applications écrites en java.
+	-> à installer
+
+4 - JDK (Java Development Kit) permet de programmer en java. Il désigne un ensemble de bibliothèques logicielles de base du langage de programmation Java, 
+     ainsi que les outils avec lesquels le code Java peut être compilé, transformé en bytecode destiné à la machine virtuelle Java.
+	-> à installer
+
+5 - JDBC (Java Database Connectivity) : API de connexion à des bases de données.
+
+6 - Langages haut niveau : langages indépendants du matériel, se rapprochent de la langue maternelle.
+    Ils sont orientés autour du problème à résoudre et permettent d'écrire des programmes en utilisant des mots usuels des langues naturelles 
+    (très souvent de l'anglais) et des symboles mathématiques familiers.
+    Un langage de haut niveau fait abstraction des caractéristiques techniques du matériel utilisé pour exécuter le programme,
+    ex : Java, PHP, Pyton, JavaScript, Ruby, C, C++...
+
+7 - Langage bas niveau : utilisés pour écrire des programmes relatifs à l’architecture et au matériel spécifiques d’un type d’ordinateur particulier.
+    Ils sont plus proches du langue maternelle d’un ordinateur (le binaire), ce qui les rend plus difficiles à comprendre pour les programmeurs.
+    ex : C, Java, Fortran...

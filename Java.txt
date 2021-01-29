@@ -1,0 +1,181 @@
+1  - POO
+2  - Encapsulation
+3  - Héritage
+4  - Polymorphisme
+5  - Classe
+6  - Classe principale
+7  - Création d'objets
+8  - Package
+9  - Public, private, protected
+10 - Méthode static
+11 - Final
+12 - Annotations
+13 - Interface Iterable
+14 - Classe abstraite
+15 - Gestion des erreurs
+16 - JavaBean
+17 - Classe DAO
+18 - Runnable - Callable
+19 - Thread (et opération atomique)
+20 - Créer des threads
+21 - Pool de threads (pool d'objets)
+22 - Etreinte fatale (deadlock)
+23 - Bloc synchronisé
+24 - Objet immutable
+25 - Classe immutable
+26 - Objet lock (verrou)
+27 - Interface Executor
+28 - Framework ForkJoinPool
+29 - Collections concurrentes
+30 - Créer un projet java
+31 - Connaître sa version de java
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+1 - Java est un langage orienté objet
+
+2 - L'encapsulation est la notion de mettre une "chose" dans une autre, cette "chose" est mise dans une capsule.
+     C'est l'idée de cacher l'information.
+
+3 - L’héritage est un mécanisme qui permet, lors de la déclaration d’une nouvelle classe, d'y inclure les caractéristiques d’une autre classe.
+
+4 - Le polymorphisme propose d'utiliser un même nom de méthode pour plusieurs types d'objets différents.
+     Le développeur n'a pas à savoir, lorsqu'il programme une méthode, le type précis de l'objet sur lequel la méthode va s'appliquer.
+
+5 - Une classe est une entité :
+	- représentant un ensemble d’objets ayant la même représentation mémoire (structure) et les mêmes comportements
+	- définissant cette structure (attributs)
+	- définissant et détenant ces comportements (méthodes)
+	- capable de générer des instances
+     On écrit toujours le code dans des classes.
+
+6 - Il faut une classe Principale qui va lancer l'application :
+    public class Principale{ 
+	    public static void main (String [] args) { 
+		    // faites quelque chose ici ... 
+	    } 
+    }
+
+7 - On crée des objets avec des méthodes (getters, setters) :
+	-> clic droit -> Source -> Generate Getters and Setters -> sélectionner les attributs -> OK
+    Un objet a :
+	-> des attributs en private
+	-> des getters et des setters pour tous les attributs en public
+	-> un constructeur par défaut sans argument
+
+8 - Packages : dossiers dans lesquels on range les classes.
+
+9 - Les fonctions et classes sont plus ou moins accessibles selon qu'elles sont :
+	- public : partout
+	- private : dans la classe
+	- protected : dans le même package et les classes filles
+
+10 - Une méthode static appartient à la classe et pas à l'objet.
+     Une méthode static peut accéder uniquement aux données statiques.
+
+11 - final = constante
+
+12 - Une annotation est une façon d'ajouter des méta-données à un code source Java.
+     Les annotations peuvent être ajoutées aux classes, méthodes, attributs, paramètres, variables locales et paquets.
+     (annotations comme dans Symfony)
+
+13 - L'interface Iterable (java.lang.Iterable) est l’une des interfaces racine de l’arborescence des collections.
+     Une classe qui implémente l’interface Iterable peut être itérée avec la boucle Java for-each.
+     Un objet d’une classe qui implémente l’interface Iterable peut être utilisé avec la boucle Java for-each.
+     Etant donné que l’interface List hérite l’interface Collection et que l’interface Collection hérite l’interface Iterable,
+     un objet List peut être utilisé avec la boucle for-each.
+     Voici un exemple d’utilisation d’un objet List avec la boucle for-each:
+     List list = new ArrayList();
+     list.add("Java");
+     list.add("Pascal");
+     list.add("PHP");
+     list.add("C++");
+     for(Object obj : list){
+         System.out.println(obj.toString());
+     }
+
+14 - Une classe abstraite est une classe dont l'implémentation n'est pas complète et qui n'est pas instanciable.
+     Elle sert de base à d'autres classes dérivées.
+
+15 - On gère les erreurs avec try catch.
+
+16 - Un composant JavaBean est une simple classe Java qui respecte certaines conventions sur le nommage, la construction et le comportement des méthodes.
+     Les JavaBeans sont des composants réutilisables.
+
+17 - Les classes DAO sont les classes qui contiennent le code qui permet d’échanger des informations avec la base de données.
+
+18 - Runnable est l’interface principale fournie pour représenter les tâches multithreads.
+     Callable est une version améliorée de Runnable qui a été ajoutée à Java 1.5.
+
+19 - Un thread sert à mener à bien le déroulement d'une tâche.
+     Un thread désigne un « fil d'exécution » dans le programme,
+     c'est-à-dire une suite linéaire et continue d'instructions qui sont exécutées séquentiellement les unes après les autres.
+     En fait, le langage Java est multi-thread, c'est-à-dire qu'il peut faire cohabiter plusieurs fils d'exécution de façon indépendante :
+     il peut faire plusieurs opérations en même temps.
+     Cependant, si on fait un counter et que plusieurs threads y ont accès, il peut y avoir des problèmes (pour l'un i=2, pour l'autre i=5...).
+     Pour éviter cela, on utilise le mot-clé "synchronized" qui garantit qu'un seul thread peut utiliser la méthode à la fois (opération atomique).
+     De plus, on ajoute le mot-clé "volatile" pour assurer une visibilité de référence appropriée entre les threads.
+     Il s’agit d’un programme s’exécutant en même temps que d’autres programmes.
+     Il est capable de se mettre en sommeil pour permettre aux autres threads d’avoir une chance d’être exécutés.
+     La période de sommeil est fixée par lui et le programmeur aura à charge de donner une valeur raisonnable de ce temps, 
+     pour permettre aux autres threads de pouvoir s’exécuter.
+     ex : un navigateur internet
+     Lorsqu'on souhaite qu'une classe puisse se comporter comme un thread, il faut que :
+	- cette classe implémente l’interface ‘Runnable’, surcharge la méthode ‘run’ et contient un champ de type ‘Thread’
+	ou
+	- cette classe hérite de la classe ‘Thread’
+
+20 - Il existe deux manières pour créer des threads. L’un en héritant la classe Thread (1) et l’autre en utilisant l’interface Runnable (2).
+     (1) - Dans la première approche, notre classe étend toujours la classe Thread. Il n’y a aucune chance d’étendre une autre classe.
+           Par conséquent, nous manquons l’héritage.
+     (2) - Dans la deuxième approche, tout en implémentant l’interface Runnable, nous pouvons étendre toute autre classe.
+           Par conséquent, nous pouvons utiliser les avantages de l’héritage.
+     Pour les raisons ci-dessus, il est recommandé d’implémenter l’interface Runnable plutôt que d’étendre la classe Thread.
+
+21 - Un pool d'objets (pool de threads ou réservoir de threads) est une collection d'objets initialisés qui vont être utilisables et réutilisables selon les besoins.
+     Le pool est constitué d'un nombre fixe de threads centraux qui sont conservés en permanence,
+     ainsi que d'un nombre excessif de threads pouvant être créés puis terminés lorsqu'ils ne sont plus nécessaires.
+     Le paramètre corePoolSize indique le nombre de threads principaux qui seront instanciés et conservés dans le pool.
+
+22 - L'étreinte fatale (deadlock ou interblocage) est un phénomène qui peut survenir en programmation concurrente.
+     Elle se produit lorsque des processus concurrents s'attendent mutuellement.
+     Un processus peut aussi s'attendre lui-même.
+     Les processus bloqués dans cet état le sont définitivement, il s'agit donc d'une situation catastrophique.
+
+23 - On appelle bloc synchronisé, tout bloc portant une déclaration synchronized.
+     Cet objet possède une unique clé.
+     Cette clé est nécessaire pour pouvoir entrer dans le bloc synchronisé et exécuter les instructions qu'il contient.
+
+24 - Un objet immutable est un objet dont l'état ne peut être changé.
+
+25 - Une classe immutable est une classe qui ne permet pas de modification de ses données.
+     ex : String -> on garde le getter mais on n'a pas de setter car sinon les autres threads pourraient changer le nom.
+		    On met donc une méthode remplace() qui va faire une copie de l'objet et les autres threads vont travailler avec la copie et non l'originale.
+
+26 - Objets locks (verrous) : en java, chaque objet a un lock unique.
+     Si un thread veut exécuter une méthode synchronized dans un objet donné, il doit d'abord obtenir le lock de cet objet.
+     Une fois que c'est fait, il peut exécuter toutes les méthodes synchronized de cet objet.
+
+27 - L'interface Executor décrit les fonctionnalités permettant l'exécution différée de tâches implémentées sous la forme de Runnable.
+
+28 - Framework ForkJoinPool
+     Il fournit des outils permettant d’accélérer le traitement parallèle en tentant d’utiliser tous les cœurs de processeur disponibles, 
+     ce qui est accompli par une approche diviser pour mieux régner .
+     En pratique, cela signifie que le cadre commence par «forquer» divisant la tâche de manière récursive en sous-tâches indépendantes plus petites 
+     jusqu’à ce qu’elles soient assez simples pour être exécutées de manière asynchrone.
+     Après cela, commence la partie «rejoindre» dans laquelle les résultats de toutes les sous-tâches sont liés de manière récursive 
+     en un seul résultat ou, dans le cas d’une tâche qui renvoie la valeur null, le programme attend simplement que toutes les sous-tâches soient exécutées.
+     Pour permettre une exécution parallèle efficace, l’infrastructure fork/join utilise un pool de threads appelé ForkJoinPool
+     qui gère les threads de travail de type ForkJoinWorkerThread.
+
+29 - Collections concurrentes
+     Collections construites sur des tableaux d'objets, qui sont recopiés intégralement à chaque fois qu'une modification est effectuée.
+     Seul le changement de tableau (qui n'est qu'un jeu de pointeurs) est synchronisé.
+     Toutes les opérations de lecture sont effectuées sur un unique tableau, en lecture seule, qui ne pose donc aucun problème de modification concurrente.
+
+30 - Créer un projet Java :
+	dans Eclipse, dans la fenêtre à gauche "Package Explorer" -> New -> Project -> choisir JavaProject
+
+31 - Connaître sa version de java installée : dans le terminal
+	-> java -version
+	-> javac -version

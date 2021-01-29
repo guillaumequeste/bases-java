@@ -1,0 +1,113 @@
+1  - MVC : JavaBean, JSP, Servlet
+2  - Créer un projet JEE
+3  - Lancer le serveur
+4  - Architecture du projet TempConverter (fchiers .java)
+5  - Architecture du projet TempConverter (fchier .xml)
+6  - Architecture du projet TempConverter (fchiers .jsp)
+7  - Lancer le projet
+8  - Créer une page (servlet, jsp, web.xml)
+9  - JSTL
+10 - JDBC
+11 - DAO
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+1 - Modèle : objets JavaBean (peuvent communiquer avec es bases de données) qui contrôlent le routage de l'application, fait les calculs
+    Vue : fichiers JSP qui vont permettre de générer du code html
+    Contrôleur : Servlets qui permettent de gérer les requêtes http. Ce sont des classes Java. Font l'aiguillage.
+    (exemples de frameworks JEE : JSF, Struts, Spring, Hibernate)
+
+2 - Créer un projet JEE :
+	dans la fenêtre à gauche "Project Explorer" -> New -> Dynamic Web Project
+	mettre le nom du projet
+	(la 1ère fois : cliquer sur "New Runtime..." et choisir la version de Tomcat voulue (la dernière version) -> Next
+			laisser le nom par défaut, vérifier que "Tomcat installation directory" pointe bien vers le dossier où est installé Tomcat)
+	-> Next
+	-> Next
+	dans la 2ème fenêtre, cocher "Generate web.xml deployment description" -> Finish
+	accepter la vue JEE
+
+3 - Lancer le serveur (voir 'installer tomcat')
+    Clic droit sur le serveur -> Start
+
+4 - Dans "TempConverter/Java Resources/src", je crée le package :
+	- fr.video2brain.tempconverter.servlet
+    et à l'intérieur la classe "ConverterServlet.java"
+	-> cette classe extends HttpServlet
+	-> j'override les méthodes doGet et doPost (clic droit -> Source -> Override/Implement Methods)
+    puis la classe "LoginServlet.java"
+	-> -> j'override les méthodes doGet et doPost (clic droit -> Source -> Override/Implement Methods)
+
+    Je peux faire la même chose pour créer un filtre (pour compter le nombre de fois que l'on a appelé le servlet)
+	-> package : fr.video2brain.tempconverter.filter
+	-> classe : ClickCounterFilter.java
+	-> cette classe implements Filter
+	-> override destroy, doFilter, init
+
+    Pour la connexion via une page de login :
+	-> package : fr.video2brain.tempconverter.models
+	-> classe : User.java
+	-> User, email et password (avec getters et setters pour ces 2 dernières)
+
+5 - Dans "TempConverter/WebContent/WEB-INF", je crée :
+	-> "web.xml" (clic droit -> New -> JSPFile)
+	   Je crée pour les classes "LoginServlet", "ConverterServlet" et "ClickCounterFilter" des  balises <servlet> et <servlet-mapping>
+		ex : <servlet>
+			<servlet-name>LoginServlet</servlet-name>
+			<servlet-class>fr.video2brain.tempconverter.servlet.LoginServlet</servlet-class>
+		     </servlet>
+		     <servlet-mapping>
+			<servlet-name>LoginServlet</servlet-name>
+			<url-pattern>/login<url-pattern>
+		     </servlet-mapping>
+
+6 - Dans "TempConverter/WebContent/WEB-INF", je crée :
+	-> "converter.jsp" (fichier html en fait) (cette page n'est accessible que si on s'est connecté correctement)
+	   Au début du fichier, après "<%@ page language...%> :
+		<%@ page import="fr.video2brain.tempconverter.models.*" %>
+		<%
+			User user = (User) request.getSession().getAttribute("user");
+			if (user == null) {
+				System.out.println("no user session");
+				response.sendRedirect("login");
+			} else {
+				System.out.println("session retrieved");
+			}
+		%>
+	   Puis le fichier html
+	-> "login.jsp" : fichier html (bien mettre des name pour les input afin de faire le lien avec le fichier "LoginServlet.java")
+
+7 - Pour lancer le projet, je clique sur le dossier "TempConverter" dans la fenêtre de gauche ("Project Explorer")
+	-> je clique sur Run (flèche blanche dans le bouton vert)
+	-> Run on Server -> OK
+	-> Tomcat v9.0... -> Next -> Finish
+	-> dans la barre d'adresse je mets "/converter" (car on n'a pas défini de route pour "/")
+	-> je peux me connecter pour accéder à la page "converter"
+
+8 - Créer une page (accueil) :
+	- créer une servlet "Accueil.java" avec la méthode doGet :
+		this.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+	- créer un fichier jsp "accueil.jsp"
+	- créer les <servlet> et <servlet-mapping> dans le fichier "web.xml"
+
+9 - JSTL (JavaServer Standard Tag Library) : balises xml que l'on peut insérer dans le code JSP.
+    C'est une bibliothèque que l'on va ajouter au code JEE.
+    Installer JSTL :
+	- télécharger le fichier ".jar" : https://course.oc-static.com/ftp-tutos/cours/java-ee/jstl-1.2.jar
+	- placer le fichier dans le dossier "lib"
+	- dans le fichier "web.xml", ajouter :
+		<jsp-config>
+        		<jsp-property-group>
+            			<url-pattern>*.jsp</url-pattern>
+            			<include-prelude>/WEB-INF/taglibs.jsp</include-prelude>
+        		</jsp-property-group>
+    		</jsp-config>
+	- créer la fichier "taglibs.jsp" dans le dossier "WEB-INF" :
+		<%@ page pageEncoding="UTF-8" %>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	- refresh le projet
+
+10 - JDBC permet de se connecter à une base de données.
+
+11 - DAO (Data Access Object) : intermédiaire entre le modèle et la base de données.
+     Le modèle communique avec une interface DAO qui est "reliée" à plusieurs systèmes de stockage.

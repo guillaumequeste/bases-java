@@ -1,0 +1,57 @@
+1 - Flux
+2 - Socket
+3 - Package java.io
+4 - Bloquant, non-bloquant, asynchrone
+5 - UDP
+6 - TCP
+7 - Datagramme
+8 - Envoi et réception de messages par datagrammes
+9 - Interface réseau (NetworkInterface)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+1 - Les flux (streams) permettent d'encapsuler les processus d'envoi et de réception de données.
+    Les flux traitent toujours les données de façon séquentielle.
+    Les flux peuvent être divisés en plusieurs catégories :
+	- les flux d'entrée (input stream)
+	- les flux de sortie (output stream)
+	- les flux de traitement de caractères
+	- les flux de traitement d'octets
+    Java définit des flux pour lire ou écrire des données mais aussi des classes qui permettent de faire des traitements sur les données du flux.
+    Ces classes doivent être associées à un flux de lecture ou d'écriture et sont considérées comme des filtres.
+    Par exemple, il existe des filtres qui permettent de mettre les données traitées dans un tampon (buffer) pour les traiter par lots.
+    Toutes ces classes sont regroupées dans le package java.io.
+
+2 - Socket : point de communication entre deux machines.
+
+3 - Le package java.io est conçu selon deux concepts très simples :
+	- un double découpage lecture/écriture et texte/binaire : indique la fonction des classes.
+	- le design pattern Decorator : indique la façon dont elles peuvent être assemblées en une chaîne de lecture ou d'écriture.
+
+4 - Bloquant, non-bloquant, asynchrone.
+    Pour une socket :
+	- blocage et synchrone signifient la même chose: vous appelez l'API, le programme attend d'avoir une réponse et la renvoie.
+	- non-blocage : si une réponse ne peut pas être retournée rapidement, l'API retourne immédiatement une erreur et ne fait rien d'autre.
+	- asynchrone : l'API répond toujours immédiatement, après avoir commencé un effort de "background" pour répondre à la demande.
+
+5 - UDP est un protocole de communication qui transmet des paquets indépendants sur le réseau sans aucune garantie d’arrivée ni de commande.
+    L'intérêt de ce protocole est sa rapidité.
+
+6 - Le protocole TCP va retransmettre jusqu'à ce que le réceptzeur ait bien reçu l'information.
+    Ce protocole est plus commun mais moins rapide.
+
+7 - Datagramme : paquet d'informations que l'on va envoyer sur le réseau à une adresse, sur un port.
+
+8 - Envoi et réception de messages par datagrammes :
+	- on crée un socket sur la machine locale pour envoyer ou recevoir des datagrammes en instanciant la classe java.net.DatagramSocket
+	- pour l'envoi d'un message : on construit un « paquet », qui est en fait une instance de la classe java.net.DatagramPacket, 
+	  contenant des données ; ce paquet comporte aussi notamment l'adresse IP de destination du message.
+	  Autrement dit, on commence par écrire un message et on le met dans une enveloppe comportant l'adresse écrite 
+	  à l'aide d'une instance de la classe java.net.InetAdress.
+	  On envoie le message à l'aide de l'instance de DatagramSocket qu'on a construite.
+	- pour la réception d'un message : on crée un « paquet », instance de la classe java.net.DatagramPacket, 
+	  avec un tampon vide susceptible de recevoir le message.
+	  On attend l'arrivée du message en utilisant l'instance de DatagramSocket qu'on a construite.
+	  On déchiffre le message.
+
+9 - Interface réseau (Network Interface) : point de contact entre la machine et l'extérieur.
