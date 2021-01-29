@@ -1,0 +1,11 @@
+1 - Go to your Heroku dashboard (https://dashboard.heroku.com/apps) and create a new app by selecting New > Create new app.
+
+2 - Name your Heroku application and choose a region. Then click on Create app.
+
+3 - Install the Heroku CLI and login to your Heroku dashboard "heroku login".
+
+4 - Install the Java CLI plugin by running the "heroku plugins:install java" command in your terminal.
+
+5 - Deploy the JAR file using the "heroku deploy:jar my-app.jar --app APP_NAME" command. Replace "my-app.jar" with your actual filename.
+
+6 - Check the URL of the deployed app under Domains: https://dashboard.heroku.com/apps/APP_NAME/settings. The application should be running there.
